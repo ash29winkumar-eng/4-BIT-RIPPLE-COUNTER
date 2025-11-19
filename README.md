@@ -24,36 +24,50 @@ In timing diagram Q0 is changing as soon as the negative edge of clock pulse is 
 
 **Procedure**
 
+1.Type the program in Quartus software.
+
+2.Compile and run the program.
+
+3.Generate the RTL schematic and save the logic diagram.
+
+4.Create nodes for inputs and outputs to generate the timing diagram.
+
+5.For different input combinations generate the timing diagram.
+
 
 **PROGRAM**
 
- Program for 4 Bit Ripple Counter and verify its truth table in quartus using Verilog programming.
-```
- Developed by:K S Ashwin Kumar
- RegisterNumber:212224040034
-```
-```
-module ex12(clk, rst, count);
-input wire clk;
-input wire rst;
-output reg [3:0] count;
+Program for 4 Bit Ripple Counter and verify its truth table in quartus using Verilog programming.
 
-always @(posedge clk or posedge rst)
-begin
-	if(rst)
-		count <= 4'b0000;
-	else
-		count <= count + 1;
-end
+Developed by: Ashwin Kumar K S
+
+RegisterNumber:212224040034
+```
+module EXP12(input clk, output reg [3:0] count);
+always @(posedge clk) count <= (count==15)?0:count+1;
 endmodule
-```
 
+module RippleCounter_tb;
+reg clk; wire [3:0] count;
+RippleCounter uut(clk,count);
+
+initial begin clk=0; forever #5 clk=~clk; end
+initial begin repeat(20) begin #5 $display("%b",count); end $finish; end
+endmodule
+
+```
 **RTL LOGIC FOR 4 Bit Ripple Counter**
 
-<img width="704" height="291" alt="image" src="https://github.com/user-attachments/assets/f075c430-a98d-443f-b15b-6a02226be4fb" />
+<img width="1460" height="833" alt="image" src="https://github.com/user-attachments/assets/a061f3bc-b9a7-4a3a-996b-4916dbc59cd4" />
+
+
 
 **TIMING DIGRAMS FOR 4 Bit Ripple Counter**
 
-<img width="858" height="233" alt="image" src="https://github.com/user-attachments/assets/17aa0d8b-3932-4550-a9bb-2e16ff24c7b4" />
+<img width="1919" height="737" alt="image" src="https://github.com/user-attachments/assets/d0f01997-35cc-4480-b242-66799a094658" />
+
+
+
 **RESULTS**
-Thus,the 4-bit-ripple-counter is implemented using Verilog and its functionality is validated with the truth table and timing diagrams.
+
+Thus the 4 Bit Ripple Counter has been implemented using Verilog successfully and validated their functionality using their truth table.
